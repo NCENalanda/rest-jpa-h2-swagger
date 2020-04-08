@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: rest-jpa-pod
+  labels:
+    app: rest-jpa
+spec:
+  containers:
+    - name: rest-jpa-h2
+      image: rest-jpa-h2
