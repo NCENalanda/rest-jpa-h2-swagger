@@ -6,8 +6,10 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Enumeration;
+import java.util.List;
 
 @Slf4j
 @Component
@@ -25,10 +27,17 @@ public class TransactionFilter  implements Filter {
         while (enumeration.hasMoreElements()){
             String  string = (String) enumeration.nextElement();
             String  value  =  req.getHeader(string);
-            log.info(string+" : "+value);
+            log.info("request :: "+string+" : "+value);
         }
 
         chain.doFilter(request, response);
+        HttpServletResponse  res  =  (HttpServletResponse)response;
+         List<String> list =  (List<String>) res.getHeaderNames();
+         for (String s:list){
+             String  value  =  res.getHeader(s);
+             log.info("response :: "+s+" : "+value);
+         }
         log.info("Committing a transaction for req : {}", req.getRequestURI());
+        log.info("____________________________________________________________________________________");
     }
 }
