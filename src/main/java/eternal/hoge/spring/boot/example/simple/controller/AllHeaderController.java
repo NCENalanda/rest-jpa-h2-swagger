@@ -3,10 +3,12 @@ package eternal.hoge.spring.boot.example.simple.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.Map;
 
 @RestController
+@ApiIgnore
 public class AllHeaderController {
 
     @GetMapping("/print-all-headers")

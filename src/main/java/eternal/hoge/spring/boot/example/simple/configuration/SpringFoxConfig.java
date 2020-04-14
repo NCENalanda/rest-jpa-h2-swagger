@@ -84,7 +84,7 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 
 
 
-        SecurityScheme oauth = new OAuthBuilder().name("spring_oauth")
+        SecurityScheme oauth = new OAuthBuilder().name("OAuth2Security")
                 .grantTypes(Arrays.asList(grantType))
                 .scopes(Arrays.asList(scopes()))
                 .build();
@@ -93,10 +93,23 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 
     private AuthorizationScope[] scopes() {
         AuthorizationScope[] scopes = {
-                new AuthorizationScope("INNO-TECHM", "for read operations"),
-                new AuthorizationScope("TELE", "for write operations"),
-                new AuthorizationScope("TECHM", "Access foo API"),
-                new AuthorizationScope("innoeye", "Access foo API")
+                new AuthorizationScope("viewBookGet", "for read operations"),
+                new AuthorizationScope("viewBookPost", "for write operations"),
+                new AuthorizationScope("viewBookById", "Access foo API"),
+                new AuthorizationScope("searchBook", "Access foo API"),
+
+
+                new AuthorizationScope("createBook", "for read operations"),
+                new AuthorizationScope("createBooks", "for write operations"),
+                new AuthorizationScope("deleteBook", "Access foo API"),
+
+
+
+                new AuthorizationScope("upateEmployee", "Access foo API"),
+                new AuthorizationScope("deleteEmployee", "for read operations"),
+                new AuthorizationScope("createEmployee", "for write operations"),
+                new AuthorizationScope("viewEmployee", "Access foo API"),
+
         };
         return scopes;
     }
