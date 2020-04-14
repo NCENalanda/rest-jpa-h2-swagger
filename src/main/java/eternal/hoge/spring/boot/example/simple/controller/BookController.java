@@ -22,7 +22,8 @@ public class BookController {
     private IBookRepository iBookRepository;
 
     @GetMapping("getBooks")
-    @ApiOperation(value = "Retrieve All books ", notes = "This operation can be use to retrieve ARNs of AWS Lambda function for a given AWS credentials. ", response = String.class, authorizations = {
+    @ApiOperation(value = "Retrieve All books ", notes = "This operation can be use to retrieve ARNs of AWS Lambda function for a given AWS credentials. ", response = String.class,
+            authorizations = {
             @Authorization(value = "OAuth2Security", scopes = {
                     @AuthorizationScope(scope = "viewBookGet", description = "View API")
             })
