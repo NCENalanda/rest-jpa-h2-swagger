@@ -1,3 +1,4 @@
+
 package eternal.hoge.spring.boot.example.simple.configuration;
 
 import org.springframework.context.annotation.Bean;
@@ -80,7 +81,7 @@ public class SpringFoxConfig implements WebMvcConfigurer {
                         new TokenRequestEndpoint(AUTH_SERVER + "/authorize", CLIENT_ID, CLIENT_SECRET))
                 .build();
 
-         ;
+        ;
 
 
 

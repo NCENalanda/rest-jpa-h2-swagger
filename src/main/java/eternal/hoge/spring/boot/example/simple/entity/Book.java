@@ -13,9 +13,9 @@ import javax.persistence.*;
 @Table
 public class Book {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public Long id;
-    public  String name;
-    public  String author;
-    public  Double price;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private  String name;
+    private  String author;
+    private  Double price;
 }
