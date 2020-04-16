@@ -111,14 +111,21 @@ public class SpringFoxConfig implements WebMvcConfigurer {
                 new AuthorizationScope("createEmployee", "for write operations"),
                 new AuthorizationScope("viewEmployee", "Access foo API"),
 
+                new AuthorizationScope("viewDocumentGet", "Access foo API"),
+                new AuthorizationScope("viewDocumentById", "for read operations"),
+                new AuthorizationScope("createDocument", "for write operations"),
+                new AuthorizationScope("createDocuments", "Access foo API"),
+                new AuthorizationScope("deleteDocument", "Access foo API")
+
         };
+        
         return scopes;
     }
 
     private SecurityContext securityContext() {
         return SecurityContext.builder()
                 .securityReferences(
-                        Arrays.asList(new SecurityReference("spring_oauth", scopes())))
+                        Arrays.asList(new SecurityReference("OAuth2Security", scopes())))
                 .forPaths(PathSelectors.any())
                 .build();
     }
