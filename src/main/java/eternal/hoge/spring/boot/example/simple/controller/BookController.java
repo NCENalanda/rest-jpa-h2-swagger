@@ -1,13 +1,17 @@
 package eternal.hoge.spring.boot.example.simple.controller;
 
 import eternal.hoge.spring.boot.example.simple.entity.Book;
+import eternal.hoge.spring.boot.example.simple.generic.ISearchFilterService;
 import eternal.hoge.spring.boot.example.simple.repository.IBookRepository;
+import eternal.hoge.spring.boot.example.simple.response.GenericResponse;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +24,9 @@ public class BookController {
 
     @Autowired
     private IBookRepository iBookRepository;
+
+    @Autowired
+    private ISearchFilterService iSearchFilterService;
 
     @GetMapping("getBooks")
     @ApiOperation(value = "Retrieve All books ", notes = "This operation can be use to retrieve ARNs of AWS Lambda function for a given AWS credentials. ", response = String.class,
@@ -57,24 +64,24 @@ public class BookController {
         return iBookRepository.findById(id).get();
     }
 
-    @ApiIgnore
-    @GetMapping("searchBook")
-//    @ApiOperation(value = "search  book ", notes = "This operation can be use to retrieve ARNs of AWS Lambda function for a given AWS credentials. ", response = String.class, authorizations = {
-//            @Authorization(value = "OAuth2Security", scopes = {
-//                    @AuthorizationScope(scope = "searchBook", description = "View API")
-//            })
-//    }, tags={ "AWS Lambda (Individual)",  })
-    //public List searchBook(@RequestParam("name") String name,@RequestParam("author") String author,@RequestParam("price") Double price){
-
-    public List searchBook(@RequestParam(value = "name",required = false) String name,@RequestParam(value = "author",required = false) String author,@RequestParam(value = "price",required = false) Double price){
-        if(name!=null)
-        return iBookRepository.findByName(name);
-        if(author!=null)
-            return iBookRepository.findByAuthor(author);
-        if(author!=null)
-            return iBookRepository.findByPrice(price);
-        else return  new ArrayList();
-    }
+//    @ApiIgnore
+//    @GetMapping("searchBook")
+////    @ApiOperation(value = "search  book ", notes = "This operation can be use to retrieve ARNs of AWS Lambda function for a given AWS credentials. ", response = String.class, authorizations = {
+////            @Authorization(value = "OAuth2Security", scopes = {
+////                    @AuthorizationScope(scope = "searchBook", description = "View API")
+////            })
+////    }, tags={ "AWS Lambda (Individual)",  })
+//    //public List searchBook(@RequestParam("name") String name,@RequestParam("author") String author,@RequestParam("price") Double price){
+//
+//    public List searchBook(@RequestParam(value = "name",required = false) String name,@RequestParam(value = "author",required = false) String author,@RequestParam(value = "price",required = false) Double price){
+//        if(name!=null)
+//        return iBookRepository.findByName(name);
+//        if(author!=null)
+//            return iBookRepository.findByAuthor(author);
+//        if(author!=null)
+//            return iBookRepository.findByPrice(price);
+//        else return  new ArrayList();
+//    }
 
     @PostMapping("/createBook")
     @ApiOperation(value = "create  book ", notes = "This operation can be use to retrieve ARNs of AWS Lambda function for a given AWS credentials. ", response = String.class, authorizations = {
@@ -105,4 +112,23 @@ public class BookController {
     public  void deleteBook(@RequestBody Book book){
          iBookRepository.deleteById(book.getId());
     }
+
+    @ApiOperation(value = "Search Book list", notes = "Search ticket list with following parameter")
+    @GetMapping("/search")
+    public GenericResponse search(@Valid @RequestParam(value = "_s") String search,
+                                  @RequestParam(value = "page", required = false) Integer page,
+                                  @RequestParam(value = "size", required = false) Integer size,
+                                  @RequestParam(value = "order", required = false) String order,
+                                  @RequestParam(value = "type", required = false) String type) {
+
+        val argSearch = "search";
+
+        log.info("Search request for ticket");
+        iSearchFilterService.addCriteria(";isDeleted!=true");
+        val searchResponse = iSearchFilterService.search(Book.class, search, order, type, page, size);
+
+
+        return searchResponse;
+    }
+
 }

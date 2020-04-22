@@ -118,7 +118,7 @@ public class SpringFoxConfig implements WebMvcConfigurer {
                 new AuthorizationScope("deleteDocument", "Access foo API")
 
         };
-        
+
         return scopes;
     }
 
