@@ -7,7 +7,7 @@ import springfox.documentation.annotations.ApiIgnore;
 import java.util.Map;
 
 @RestController
-//@ApiIgnore
+@ApiIgnore
 @Slf4j
 public class AllHeaderController {
 

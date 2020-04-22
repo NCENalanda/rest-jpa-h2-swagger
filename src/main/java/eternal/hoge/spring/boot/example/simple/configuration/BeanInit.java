@@ -1,8 +1,10 @@
 package eternal.hoge.spring.boot.example.simple.configuration;
 
 import eternal.hoge.spring.boot.example.simple.entity.Book;
+import eternal.hoge.spring.boot.example.simple.entity.Department;
 import eternal.hoge.spring.boot.example.simple.entity.Document;
 import eternal.hoge.spring.boot.example.simple.entity.Employee;
+import eternal.hoge.spring.boot.example.simple.repository.DepartmentRepository;
 import eternal.hoge.spring.boot.example.simple.repository.EmployeeRepository;
 import eternal.hoge.spring.boot.example.simple.repository.IBookRepository;
 import eternal.hoge.spring.boot.example.simple.repository.IDocumentRepository;
@@ -23,10 +25,19 @@ public class BeanInit {
     private EmployeeRepository  employeeRepository;
     @Autowired
     private IDocumentRepository documentRepository;
+
+    @Autowired
+    private DepartmentRepository departmentRepository;
+
+
     @Bean(initMethod = "init")
     public   void  exceuteSql(){
         log.info("exceuteSql()");
-        this.addBook().addEmployee().addDocument();
+        this.addBook()
+                .addEmployee()
+                .addDocument()
+                .addDepartment()
+        ;
 
     }
 
@@ -76,6 +87,30 @@ public class BeanInit {
         Document   document6 = new Document();
         document6.setTitle("document6");document6.setUserId(3L);
         documentRepository.saveAll(Arrays.asList(document1,document2,document3,document4,document5,document6));
+        return this;
+    }
+
+    public BeanInit  addDepartment(){
+        log.info("addDepartment()");
+
+        Department department = new Department();
+        department.setName("IT");department.setLocation("HYD");department.setTotalEmployees(1000);
+        Department department1 = department;
+
+        department = new Department();
+        department.setName("Construction");department.setLocation("DELHI");department.setTotalEmployees(4000);
+        Department department2 = department;
+
+        department = new Department();
+        department.setName("Management");department.setLocation("MUMBAI");department.setTotalEmployees(500);
+        Department department3 = department;
+
+        department = new Department();
+        department.setName("Finance");department.setLocation("MUMBAI");department.setTotalEmployees(700);
+        Department department4 = department;
+
+        departmentRepository.saveAll(Arrays.asList(department1,department2,department3,department4));
+
         return this;
     }
 }
