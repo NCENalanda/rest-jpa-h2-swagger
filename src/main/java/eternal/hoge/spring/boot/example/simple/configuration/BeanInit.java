@@ -1,13 +1,7 @@
 package eternal.hoge.spring.boot.example.simple.configuration;
 
-import eternal.hoge.spring.boot.example.simple.entity.Book;
-import eternal.hoge.spring.boot.example.simple.entity.Department;
-import eternal.hoge.spring.boot.example.simple.entity.Document;
-import eternal.hoge.spring.boot.example.simple.entity.Employee;
-import eternal.hoge.spring.boot.example.simple.repository.DepartmentRepository;
-import eternal.hoge.spring.boot.example.simple.repository.EmployeeRepository;
-import eternal.hoge.spring.boot.example.simple.repository.IBookRepository;
-import eternal.hoge.spring.boot.example.simple.repository.IDocumentRepository;
+import eternal.hoge.spring.boot.example.simple.entity.*;
+import eternal.hoge.spring.boot.example.simple.repository.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -29,6 +23,9 @@ public class BeanInit {
     @Autowired
     private DepartmentRepository departmentRepository;
 
+    @Autowired
+    private CompanyRepository companyRepository;
+
 
     @Bean(initMethod = "init")
     public   void  exceuteSql(){
@@ -37,8 +34,26 @@ public class BeanInit {
                 .addEmployee()
                 .addDocument()
                 .addDepartment()
+                .addCompany()
         ;
 
+    }
+
+    private void addCompany() {
+        log.info("addCompany()");
+        Company company = new Company();
+        company.setCeo("ceo-1");company.setCurrentRevenue(111111111.00);
+        company.setDirector("director-1");company.setHeadquarters("Mumbai");
+        company.setName("comp-1");company.setTotalStaff(2790);
+        Company company1 = company;
+
+        company = new Company();
+        company.setCeo("ceo-2");company.setCurrentRevenue(341111111.00);
+        company.setDirector("director-2");company.setHeadquarters("NEW-DELHI");
+        company.setName("comp-2");company.setTotalStaff(7690);
+        Company company2 = company;
+
+        companyRepository.saveAll(Arrays.asList(company1,company2));
     }
 
     public  BeanInit addBook(){
@@ -60,10 +75,13 @@ public class BeanInit {
         log.info("addEmployee()");
         Employee employee1 = new Employee();
         employee1.setDepartment("IT");employee1.setName("emp1");employee1.setSalary(100000);
+        employee1.setCompany("comp-1");employee1.setProject("proj-1");
         Employee employee2 = new Employee();
         employee2.setDepartment("Construction");employee2.setName("emp2");employee2.setSalary(200000);
+        employee2.setCompany("comp-1");employee2.setProject("proj-1");
         Employee employee3 = new Employee();
         employee3.setDepartment("Management");employee3.setName("emp3");employee3.setSalary(300000);
+        employee3.setCompany("comp-1");employee3.setProject("proj-1");
         employeeRepository.saveAll(Arrays.asList(employee1,employee2,employee3));
         return this;
     }

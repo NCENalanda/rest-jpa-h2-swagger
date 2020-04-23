@@ -1,5 +1,8 @@
 package eternal.hoge.spring.boot.example.simple.entity;
  
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +12,8 @@ import javax.persistence.Table;
  
 @Entity
 @Table(name="EMPLOYEE")
+@Getter
+@Setter
 public class Employee {
  
  @Id
@@ -20,9 +25,15 @@ public class Employee {
  
  @Column(name="EMPLOYEE_SALARY")
  private Integer salary;
+
+ @Column(name="PROJECT")
+ private String project;
  
  @Column(name="DEPARTMENT")
  private String department;
+
+ @Column(name="COMPANY")
+ private String company;
 
  public Long getId() {
   return id;
