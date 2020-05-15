@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
+//import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.builders.AuthorizationCodeGrantBuilder;
 import springfox.documentation.builders.OAuthBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -25,8 +25,8 @@ import java.util.Arrays;
 
 @Configuration
 @EnableSwagger2
-//@EnableWebMvc
-@Import(BeanValidatorPluginsConfiguration.class)
+@EnableWebMvc
+//@Import(BeanValidatorPluginsConfiguration.class)
 public class SpringFoxConfig implements WebMvcConfigurer {
 
     //  AAAAAAAAAAA-123   REST-JPA-H2-SWAGGER-APP    "wQtjvPXTefJcWEwX9J9EWRl1JP4a";

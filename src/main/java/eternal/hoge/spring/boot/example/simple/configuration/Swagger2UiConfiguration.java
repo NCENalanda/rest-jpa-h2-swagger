@@ -24,7 +24,7 @@ import java.util.List;
 
 @SuppressWarnings("deprecation")
 //@Configuration
-@EnableSwagger2
+//@EnableSwagger2
 public class Swagger2UiConfiguration implements WebMvcConfigurer {
 
 

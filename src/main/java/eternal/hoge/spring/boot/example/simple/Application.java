@@ -1,5 +1,7 @@
 package eternal.hoge.spring.boot.example.simple;
  
+//import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+//import io.swagger.v3.oas.annotations.info.Info;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
@@ -7,6 +9,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  
 @SpringBootApplication
 @EnableSwagger2
+//@OpenAPIDefinition(info = @Info(title = "Product Api",version = "2.0" ))
 @ComponentScan(basePackages = "eternal.hoge.spring.boot.example.simple")
 public class Application {
  
