@@ -87,4 +87,43 @@ public class FileUploadController {
         }
         return  null;
     }
+
+    @DeleteMapping("/delete")
+    public void singleFileDelete(@PathVariable("file") String file) throws IOException {
+
+        log.info(" singleFileDelete  ");
+        delete(file);
+    }
+
+    private void delete(String file) throws IOException{
+
+        Path path = Paths.get(UPLOADED_FOLDER+file);
+
+        boolean isDeleted = Files.deleteIfExists(path);
+        if(isDeleted) {
+            log.info("File deleted successfully");
+        } else {
+            log.info("File doesn't exist");
+        }
+    }
+
+    @GetMapping("/list")
+    public void listAllFiles() {
+
+        log.info(" listAllFiles  ");
+        showList(UPLOADED_FOLDER);
+    }
+
+    private  void showList(String directoryName){
+        File directory = new File(directoryName);
+
+        File[] fList = directory.listFiles();
+
+        for (File file : fList){
+            if (file.isFile()){
+                log.info(file.getAbsolutePath());
+            }
+        }
+
+    }
 }
