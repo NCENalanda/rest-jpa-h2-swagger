@@ -4,7 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
-import java.util.Map;
+import javax.ws.rs.Produces;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @RestController
 @ApiIgnore
@@ -31,5 +33,42 @@ public class AllHeaderController {
     public  String defaultget(){
         log.info("  defaultget() get ");
         return  "working";
+    }
+
+
+    @GetMapping("/csv")
+    @Produces("text/plain")
+    public String csvResponse(){
+        log.info("  defaultget() post ");
+
+        SimpleDateFormat dateTimeInGMT = new SimpleDateFormat("yyyy-MMM-dd hh:mm:ss aa");
+        //Setting the time zone
+        dateTimeInGMT.setTimeZone(TimeZone.getTimeZone("GMT"));
+        List list = Arrays.asList("Content-Type: text/html;charset=ISO-8859-1",dateTimeInGMT.format(new Date()));
+
+
+        String str  =  list.toString();
+        str = str.replace("[","");
+        str = str.replace("]","");
+
+        List l1  = Arrays.asList("1","2","3");
+        List l2  = Arrays.asList("a","b","c");
+        String str1  =  l1.toString();
+       str1 =  str1.replace("[","");
+       str1 =  str1.replace("]","");
+
+        str = str+"<br>";
+        str = str+str1.toString();
+
+         str1  =  l2.toString();
+        str1 =  str1.replace("[","");
+        str1 =  str1.replace("]","");
+
+       str = str+"<br>";
+        str = str+str1.toString();
+        return str;
+
+
+
     }
 }

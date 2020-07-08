@@ -1,15 +1,19 @@
 package eternal.hoge.spring.boot.example.simple.controller;
 
-import io.micrometer.core.instrument.util.IOUtils;
+
 //import io.swagger.v3.oas.annotations.Parameter;
 //import io.swagger.v3.oas.annotations.enums.ParameterIn;
 //import io.swagger.v3.oas.annotations.media.Schema;
+import eternal.hoge.spring.boot.example.simple.exception.BusinessException;
+import io.micrometer.core.instrument.util.IOUtils;
+//import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.Produces;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -18,6 +22,11 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.TimeZone;
 
 
 //import io.swagger.v3.oas.annotations.tags.Tag;
@@ -126,4 +135,50 @@ public class FileUploadController {
         }
 
     }
+
+    @PostMapping("/createPost")
+    @Consumes("multipart/form-data")
+    public String createPost(@RequestParam(required = false, name = "trbpost") String trbpost,
+                             @RequestParam(required = false, name = "fileData") List<MultipartFile> files,
+                             @RequestParam(required = false, name = "fileNames") List<String> fileNames) throws BusinessException {
+        return null;
+    }
+
+
+    @GetMapping("/csv")
+    @Produces("text/plain")
+    public String csvResponse(){
+        log.info("  defaultget() post ");
+
+        SimpleDateFormat dateTimeInGMT = new SimpleDateFormat("yyyy-MMM-dd hh:mm:ss aa");
+        //Setting the time zone
+        dateTimeInGMT.setTimeZone(TimeZone.getTimeZone("GMT"));
+        List list = Arrays.asList("Content-Type: text/html;charset=ISO-8859-1",dateTimeInGMT.format(new Date()));
+
+
+        String str  =  list.toString();
+        str = str.replace("[","");
+        str = str.replace("]","");
+
+        List l1  = Arrays.asList("1","2","3");
+        List l2  = Arrays.asList("a","b","c");
+        String str1  =  l1.toString();
+        str1 =  str1.replace("[","");
+        str1 =  str1.replace("]","");
+
+        str = str+"<br>";
+        str = str+str1.toString();
+
+        str1  =  l2.toString();
+        str1 =  str1.replace("[","");
+        str1 =  str1.replace("]","");
+
+        str = str+"<br>";
+        str = str+str1.toString();
+        return str;
+
+
+
+    }
+
 }
