@@ -1,14 +1,0 @@
-
-s
-java:S1488E"]Immediately return this expression instead of assigning it to the temporary variable "basic".(Ê™Úé
-t
-java:S1488_"^Immediately return this expression instead of assigning it to the temporary variable "scopes".(û²
-V	java:S125"<This block of commented-out lines of code should be removed.(©˜ßåøÿÿÿÿ
-7
-java:S1116S"Remove this empty statement.(Åñ­õşÿÿÿÿ
-v
-java:S1128"`Remove this unused import 'springfox.documentation.swagger2.mappers.VendorExtensionsMapperImpl'.(œÍ£‡
-s
-java:S1488W"]Immediately return this expression instead of assigning it to the temporary variable "oauth".(š¨ò
-y
-java:S1488I"^Immediately return this expression instead of assigning it to the temporary variable "apiKey".(Èâûùÿÿÿÿ

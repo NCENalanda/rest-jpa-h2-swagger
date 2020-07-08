@@ -1,9 +1,0 @@
-
-N	java:S1063"9Replace this use of System.out or System.err by a logger.(üÕå›
-[
-java:S4684E"@Replace this persistent entity with a simple POJO or DTO object.(Úú›€úÿÿÿÿ
-N	java:S106="9Replace this use of System.out or System.err by a logger.(’ºê‡
-[
-java:S46841"@Replace this persistent entity with a simple POJO or DTO object.(Ñ¢…Õÿÿÿÿÿ
-|
-java:S1488"aImmediately return this expression instead of assigning it to the temporary variable "employees".(ªŠ—âýÿÿÿÿ
