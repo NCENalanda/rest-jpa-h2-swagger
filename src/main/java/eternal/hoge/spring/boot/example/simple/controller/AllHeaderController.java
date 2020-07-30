@@ -36,6 +36,17 @@ public class AllHeaderController {
     }
 
 
+    @GetMapping("/time/{id}")
+    public  String timeout(@PathVariable("id") Long id ){
+        log.info("  timeout() ");
+        try {
+            Thread.sleep(id);
+        }catch (Exception e){e.printStackTrace();}
+        log.info("  time "+id);
+        return  "working   : "+id;
+    }
+
+
     @GetMapping("/csv")
     @Produces("text/plain")
     public String csvResponse(){
