@@ -26,7 +26,7 @@ public class AllHeaderController {
         log.info("  defaultget() post ");
         log.info("Object is : "+o.toString());
 
-        return  "working";
+        return  "working : "+o.toString();
     }
 
     @GetMapping("/")
