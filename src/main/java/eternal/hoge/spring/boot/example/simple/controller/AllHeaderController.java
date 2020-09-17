@@ -1,5 +1,6 @@
 package eternal.hoge.spring.boot.example.simple.controller;
 
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
@@ -9,10 +10,11 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @RestController
-@ApiIgnore
+@Api
 @Slf4j
 public class AllHeaderController {
 
+    @ApiIgnore
     @GetMapping("/print-all-headers")
     public  Map<String,String> getAllheaders(@RequestHeader Map<String,String> headers){
         headers.forEach((key,value) ->{
@@ -36,15 +38,7 @@ public class AllHeaderController {
     }
 
 
-    @GetMapping("/time/{id}")
-    public  String timeout(@PathVariable("id") Long id ){
-        log.info("  timeout() ");
-        try {
-            Thread.sleep(id);
-        }catch (Exception e){e.printStackTrace();}
-        log.info("  time "+id);
-        return  "working   : "+id;
-    }
+
 
 
     @GetMapping("/csv")
