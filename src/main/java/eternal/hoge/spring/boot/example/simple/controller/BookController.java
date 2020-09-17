@@ -44,11 +44,12 @@ public class BookController {
 
 
     @PostMapping("getBooks")
-    @ApiOperation(value = "Retrieve All books ", notes = "This operation can be use to retrieve ARNs of AWS Lambda function for a given AWS credentials. ", response = String.class, authorizations = {
-            @Authorization(value = "OAuth2Security", scopes = {
-                    @AuthorizationScope(scope = "viewBookPost", description = "View API")
-            })
-    }, tags={ "AWS Lambda (Individual)",  })
+    @ApiOperation(
+            value = "Retrieve All books ",
+            notes = "This operation can be use to retrieve ARNs of AWS Lambda function for a given AWS credentials. ",
+            response = String.class,
+            extensions = {@Extension(properties = {@ExtensionProperty(name = "x-auth-type",value = "None")})},
+            tags={ "AWS Lambda (Individual)",  })
     public  List<Book>  getListBook1(){
         return iBookRepository.findAll();
     }
